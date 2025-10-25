@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyA_AhHkrawcflBU7QlSBX7GZvBkqsDrECw",
+        authDomain: "web-development-ddc95.firebaseapp.com",
+        projectId: "web-development-ddc95",
+        storageBucket: "web-development-ddc95.firebasestorage.app",
+        messagingSenderId: "1027838655808",
+        appId: "1:1027838655808:web:a96d83dc12ca255ef58ea5",
+        measurementId: "G-SQ2FL28VF0",
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+  </head>
+  <body>
+    <h1>Sign Up</h1>
+    <form onsubmit="SignUp();return false">
+      <input type="email" placeholder="Email address" id="email" />
+      <input type="password" placeholder="Password" id="password" />
+      <input type="submit" value="Sign Up" />
+    </form>
+    <script src="./js/sign-up.js"></script>
+  </body>
+</html>
