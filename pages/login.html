@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Firebase</title>
+    <title>Log In</title>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
     <script>
@@ -20,14 +20,14 @@
     </script>
   </head>
   <body>
-    <h1>Sign Up</h1>
-    <form onsubmit="SignUp();return false">
-      <input type="email" placeholder="Email address" id="email" />
-      <input type="password" placeholder="Password" id="password" />
+    <h1>Log In</h1>
+    <form onsubmit="LoginHandler();return false">
+      <input type="email" placeholder="Email Address" id="email" required />
+      <input type="password" placeholder="Password" id="password" required />
       <p id="message"></p>
-      <input type="submit" value="Sign Up" />
+      <input type="submit" value="Log In" id="btn" />
     </form>
-    <a href="./pages/login.html">Log In</a>
-    <script src="./js/sign-up.js"></script>
+    <a href="./../index.html">Sign Up</a>
+    <script src="./../js/login.js"></script>
   </body>
 </html>
