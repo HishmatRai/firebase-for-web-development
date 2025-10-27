@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Email - Firebase Auth</title>
+    <link rel="stylesheet" href="./../css/login.css" />
+    <link rel="stylesheet" href="./../css/verify-email.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="verification-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          />
+        </svg>
+      </div>
+
+      <div class="header">
+        <h1>Verify Your Email</h1>
+        <p>We've sent a verification link to your email</p>
+      </div>
+
+      <div class="email-display" id="userEmail">testing@gmail.com</div>
+
+      <div class="info-box">
+        <p>
+          <strong>📧 Check your inbox!</strong><br />
+          Click the verification link in the email we sent you. If you don't see
+          it, check your spam folder.
+        </p>
+      </div>
+
+      <p id="message"></p>
+
+      <div class="action-buttons">
+        <button
+          class="btn-primary"
+          id="resendBtn"
+          onclick="ResendVerification()"
+        >
+          Resend Verification Email
+        </button>
+        <button class="btn-secondary" onclick="CheckVerification()">
+          I've Verified - Continue
+        </button>
+      </div>
+
+      <div class="link-container">
+        <p>Wrong email?</p>
+        <a href="#" onclick="Logout()">Log Out</a>
+      </div>
+    </div>
+    <script src="./../js/verify-email.js"></script>
+  </body>
+</html>
