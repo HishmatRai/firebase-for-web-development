@@ -10,12 +10,20 @@ const LoginHandler = () => {
     .auth()
     .signInWithEmailAndPassword(email.value, password.value)
     .then((res) => {
-      console.log(res.user);
       message.innerHTML = "Successfully logged in";
       message.setAttribute("class", "success");
       btn.value = "Log In";
+      console.log(res.user);
+      if (res.user.emailVerified) {
+        setTimeout(() => {
+          window.location.assign("./home.html");
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          window.location.assign("./verify-email.html");
+        }, 2000);
+      }
       // move
-      // window.location.assign("./home.html");
     })
     .catch((error) => {
       console.log(error);

@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome - Firebase Auth</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script src="./js/firebase-config.js"></script>
     <style>
       * {
         margin: 0;
@@ -12,7 +15,7 @@
       }
 
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         display: flex;
@@ -106,42 +109,38 @@
       }
 
       .dots::after {
-        content: '';
+        content: "";
         animation: dots 1.5s steps(4, end) infinite;
       }
 
       @keyframes dots {
         0%,
         20% {
-          content: '';
+          content: "";
         }
         40% {
-          content: '.';
+          content: ".";
         }
         60% {
-          content: '..';
+          content: "..";
         }
         80%,
         100% {
-          content: '...';
+          content: "...";
         }
       }
     </style>
   </head>
   <body>
     <div class="loading-container">
-      <div class="logo">
-      </div>
+      <div class="logo"></div>
 
       <div class="spinner">
         <div class="spinner-ring"></div>
       </div>
 
-      <div class="loading-text">
-        Loading<span class="dots"></span>
-      </div>
+      <div class="loading-text">Loading<span class="dots"></span></div>
     </div>
-
-  
+    <script src="./js/index.js"></script>
   </body>
 </html>

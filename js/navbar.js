@@ -1,6 +1,8 @@
 firebase.auth().onAuthStateChanged((user) => {
+  // user data -< null
   if (user) {
     console.log(user)
+    // emailVerified = false
     if (user.emailVerified) {
       console.log("verified true",user);
       // login true

@@ -6,6 +6,10 @@
     <title>Verify Email - Firebase Auth</title>
     <link rel="stylesheet" href="./../css/login.css" />
     <link rel="stylesheet" href="./../css/verify-email.css" />
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script src="./../js/firebase-config.js"></script>
+        <link rel="stylesheet" href="./../css/message.css" />
   </head>
   <body>
     <div class="container">
@@ -30,7 +34,7 @@
         <p>We've sent a verification link to your email</p>
       </div>
 
-      <div class="email-display" id="userEmail">testing@gmail.com</div>
+      <div class="email-display" id="userEmail">Loading ...</div>
 
       <div class="info-box">
         <p>
@@ -46,18 +50,14 @@
         <button
           class="btn-primary"
           id="resendBtn"
-          onclick="ResendVerification()"
+          onclick="resendVerificationHandler()"
         >
           Resend Verification Email
         </button>
-        <button class="btn-secondary" onclick="CheckVerification()">
+          <p id="message"></p>
+        <button class="btn-secondary" onclick="checkVerificationHandler()">
           I've Verified - Continue
         </button>
-      </div>
-
-      <div class="link-container">
-        <p>Wrong email?</p>
-        <a href="#" onclick="Logout()">Log Out</a>
       </div>
     </div>
     <script src="./../js/verify-email.js"></script>
