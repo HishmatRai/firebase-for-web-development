@@ -32,3 +32,24 @@ const LoginHandler = () => {
       btn.value = "Log In";
     });
 };
+
+// login with google
+const loginWithGoogleHandler = () => {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  message.style.display = "block";
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((res) => {
+      console.log(res.user);
+      message.innerHTML = "Successfully logged in";
+      message.setAttribute("class", "success");
+      setTimeout(() => {
+        window.location.assign("./home.html");
+      }, 2000);
+    })
+    .catch((error) => {
+      message.innerHTML = error.message;
+      message.setAttribute("class", "error");
+    });
+};
