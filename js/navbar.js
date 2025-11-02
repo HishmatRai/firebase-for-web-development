@@ -1,12 +1,21 @@
+let userName = document.getElementById("userName");
+let userInitial = document.getElementById("userInitial");
 firebase.auth().onAuthStateChanged((user) => {
-  // user data -< null
   if (user) {
-    console.log(user)
-    // emailVerified = false
     if (user.emailVerified) {
-      console.log("verified true",user);
-      // login true
-      // emailverified true
+      console.log("verified true", user);
+      // get data
+      firebase
+        .database()
+        .ref("users/" + user.uid)
+        .on("value", (userRes) => {
+          console.log(userRes.val());
+          userName.innerHTML = `${userRes.val().firstname} ${
+            userRes.val().lastname
+          }`;
+          console.log(userRes.val().firstname.slice(0, 1));
+          userInitial.innerHTML = userRes.val().firstname.slice(0, 1);
+        });
     } else {
       window.location.assign("./verify-email.html");
     }
@@ -22,6 +31,3 @@ const logoutHandler = () => {
       window.location.assign("./login.html");
     });
 };
-
-// home ->
-// login : true -> home  false ->login.html
