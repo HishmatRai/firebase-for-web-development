@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f5f7fa;
   min-height: 100vh;
 }
@@ -130,7 +130,11 @@ body {
   color: #667eea;
   font-size: 18px;
 }
-
+.user-avatar > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
 .user-name {
   color: white;
   font-size: 14px;

@@ -2,8 +2,7 @@ let email = document.getElementById("email");
 let password = document.getElementById("password");
 let message = document.getElementById("message");
 let btn = document.getElementById("btn");
-let firstname = document.getElementById("firstname");
-let lastname = document.getElementById("lastname");
+let fullName = document.getElementById("fullname");
 let age = document.getElementById("age");
 let gender = document.getElementsByName("gender");
 let phone = document.getElementById("phone");
@@ -17,7 +16,7 @@ const SignUp = () => {
   }
   message.style.display = "block";
   btn.value = "Loading ...";
-  // createUserWithEmailAndPassword => 
+  // createUserWithEmailAndPassword =>
   firebase
     .auth()
     .createUserWithEmailAndPassword(email.value, password.value)
@@ -32,8 +31,7 @@ const SignUp = () => {
             .database()
             .ref("users/" + res.user.uid)
             .set({
-              firstname: firstname.value,
-              lastname: lastname.value,
+              fullName: fullName.value,
               email: email.value,
               age: selectedAge,
               gender: selectedGender,

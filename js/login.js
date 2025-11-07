@@ -42,11 +42,21 @@ const loginWithGoogleHandler = () => {
     .signInWithPopup(provider)
     .then((res) => {
       console.log(res.user);
-      message.innerHTML = "Successfully logged in";
-      message.setAttribute("class", "success");
-      setTimeout(() => {
-        window.location.assign("./home.html");
-      }, 2000);
+        //  firebase
+        //     .database()
+        //     .ref("users/" + res.user.uid)
+        //     .set({
+        //       fullName: fullName.value,
+        //       email: email.value,
+        //       age: selectedAge,
+        //       gender: selectedGender,
+        //       phone: phone.value,
+        //     })
+      // message.innerHTML = "Successfully logged in";
+      // message.setAttribute("class", "success");
+      // setTimeout(() => {
+      //   window.location.assign("./home.html");
+      // }, 2000);
     })
     .catch((error) => {
       message.innerHTML = error.message;

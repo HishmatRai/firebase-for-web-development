@@ -1,5 +1,4 @@
-let firstName = document.getElementById("firstName");
-let lastName = document.getElementById("lastName");
+let fullName = document.getElementById("fullname");
 let email = document.getElementById("email");
 let age = document.getElementById("age");
 let phone = document.getElementById("phone");
@@ -7,22 +6,33 @@ let gender = document.getElementsByName("gender");
 let bio = document.getElementById("bio");
 let message = document.getElementById("message");
 let updateBtn = document.getElementById("updateBtn");
+let userId = document.getElementById("userId");
+let emailVerified = document.getElementById("emailVerified");
+let lastSignIn = document.getElementById("lastSignIn");
+let createdDate = document.getElementById("createdDate");
+let profileImage = document.getElementById("profileImage");
 let uid;
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     if (user.emailVerified) {
       uid = user.uid;
+      console.log("user ====>>>>>", user);
+      userId.innerHTML = user?.uid;
+      emailVerified.innerHTML = user?.emailVerified;
+      lastSignIn.innerHTML = user?.metadata?.lastSignInTime;
+      createdDate.innerHTML = user?.metadata?.creationTime;
       firebase
         .database()
         .ref("users/" + uid)
         .on("value", (userRes) => {
           console.log("profile page => ", userRes.val());
-          firstName.value = userRes.val().firstname;
-          lastName.value = userRes.val().lastname;
+          fullName.value = userRes.val().fullName;
           email.value = userRes.val().email;
           age.value = userRes.val().age;
           phone.value = userRes.val().phone;
-          bio.value = userRes.val().bio;
+          userRes.val().bio && (bio.value = userRes.val().bio);
+          userRes.val().profileImgURL &&
+            (profileImage.src = userRes.val().profileImgURL);
           for (let i = 0; i < gender.length; i++) {
             if (gender[i].value == userRes.val().gender) {
               gender[i].checked = true;
@@ -48,8 +58,7 @@ const updateProfileHandler = () => {
     .database()
     .ref("users/" + uid)
     .update({
-      firstname: firstName.value,
-      lastname: lastName.value,
+      fullName: fullName.value,
       age: selectedAge,
       gender: selectedGender,
       phone: phone.value,

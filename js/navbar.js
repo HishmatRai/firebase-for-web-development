@@ -1,5 +1,5 @@
 let userName = document.getElementById("userName");
-let userInitial = document.getElementById("userInitial");
+let headerProfileImg = document.getElementById("header-profile-img");
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     if (user.emailVerified) {
@@ -7,13 +7,10 @@ firebase.auth().onAuthStateChanged((user) => {
         .database()
         .ref("users/" + user.uid)
         .on("value", (userRes) => {
-          userName.innerHTML = `${userRes.val().firstname} ${
-            userRes.val().lastname
-          }`;
-          userInitial.innerHTML = userRes
-            .val()
-            .firstname.slice(0, 1)
-            .toUpperCase();
+          userName.innerHTML = `${userRes.val().fullName}`;
+          if (userRes.val().profileImgURL) {
+            headerProfileImg.src = userRes.val().profileImgURL;
+          }
         });
     } else {
       window.location.assign("./verify-email.html");
