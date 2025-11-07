@@ -42,24 +42,60 @@ const loginWithGoogleHandler = () => {
     .signInWithPopup(provider)
     .then((res) => {
       console.log(res.user);
-        //  firebase
-        //     .database()
-        //     .ref("users/" + res.user.uid)
-        //     .set({
-        //       fullName: fullName.value,
-        //       email: email.value,
-        //       age: selectedAge,
-        //       gender: selectedGender,
-        //       phone: phone.value,
-        //     })
-      // message.innerHTML = "Successfully logged in";
-      // message.setAttribute("class", "success");
-      // setTimeout(() => {
-      //   window.location.assign("./home.html");
-      // }, 2000);
+      // sign in || sign up
+      firebase
+        .database()
+        .ref("users/" + res.user.uid)
+        .once("value")
+        .then((userRes) => {
+          if (userRes.val()) {
+            message.innerHTML = "Successfully logged in";
+            message.setAttribute("class", "success");
+            btn.value = "Log In";
+            setTimeout(() => {
+              window.location.assign("./home.html");
+            }, 2000);
+          } else {
+            firebase
+              .database()
+              .ref("users/" + res.user.uid)
+              .set({
+                fullName: res.user.displayName,
+                email: res.user.email,
+                age: "25",
+                gender: "Male",
+                phone: res.user.phoneNumber,
+                profileImgURL: res.user.photoURL,
+              })
+              .then(() => {
+                message.innerHTML = "Successfully logged in";
+                message.setAttribute("class", "success");
+                btn.value = "Log In";
+                setTimeout(() => {
+                  window.location.assign("./home.html");
+                }, 2000);
+              });
+          }
+        });
     })
     .catch((error) => {
       message.innerHTML = error.message;
       message.setAttribute("class", "error");
+    });
+};
+
+// login with facebook
+const loginWithFacebookHandler = () => {
+  var provider = new firebase.auth.FacebookAuthProvider();
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      var user = result.user;
+      console.log("user ===>", user);
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      console.log("error ===>", errorMessage);
     });
 };

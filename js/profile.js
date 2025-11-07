@@ -29,7 +29,7 @@ firebase.auth().onAuthStateChanged((user) => {
           fullName.value = userRes.val().fullName;
           email.value = userRes.val().email;
           age.value = userRes.val().age;
-          phone.value = userRes.val().phone;
+          userRes.val().phone && (phone.value = userRes.val().phone);
           userRes.val().bio && (bio.value = userRes.val().bio);
           userRes.val().profileImgURL &&
             (profileImage.src = userRes.val().profileImgURL);
