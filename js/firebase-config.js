@@ -1,11 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyA_AhHkrawcflBU7QlSBX7GZvBkqsDrECw",
-  authDomain: "web-development-ddc95.firebaseapp.com",
-  databaseURL: "https://web-development-ddc95-default-rtdb.firebaseio.com",
-  projectId: "web-development-ddc95",
-  storageBucket: "web-development-ddc95.firebasestorage.app",
-  messagingSenderId: "1027838655808",
-  appId: "1:1027838655808:web:a96d83dc12ca255ef58ea5",
-  measurementId: "G-SQ2FL28VF0",
+  apiKey: "AIzaSyDK6LSgxp0nD8WxHNkV7hu-2u2t9fNoNZw",
+  authDomain: "wxyz-14e79.firebaseapp.com",
+  databaseURL: "https://wxyz-14e79.firebaseio.com",
+  projectId: "wxyz-14e79",
+  storageBucket: "wxyz-14e79.appspot.com",
+  messagingSenderId: "377674096227",
+  appId: "1:377674096227:web:7db7daa94f8a10984ee256",
 };
 firebase.initializeApp(firebaseConfig);

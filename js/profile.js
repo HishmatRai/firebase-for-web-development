@@ -11,35 +11,34 @@ let emailVerified = document.getElementById("emailVerified");
 let lastSignIn = document.getElementById("lastSignIn");
 let createdDate = document.getElementById("createdDate");
 let profileImage = document.getElementById("profileImage");
+let uploadMessage = document.getElementById("uploadMessage");
 let uid;
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    if (user.emailVerified) {
-      uid = user.uid;
-      console.log("user ====>>>>>", user);
-      userId.innerHTML = user?.uid;
-      emailVerified.innerHTML = user?.emailVerified;
-      lastSignIn.innerHTML = user?.metadata?.lastSignInTime;
-      createdDate.innerHTML = user?.metadata?.creationTime;
-      firebase
-        .database()
-        .ref("users/" + uid)
-        .on("value", (userRes) => {
-          console.log("profile page => ", userRes.val());
-          fullName.value = userRes.val().fullName;
-          email.value = userRes.val().email;
-          age.value = userRes.val().age;
-          userRes.val().phone && (phone.value = userRes.val().phone);
-          userRes.val().bio && (bio.value = userRes.val().bio);
-          userRes.val().profileImgURL &&
-            (profileImage.src = userRes.val().profileImgURL);
-          for (let i = 0; i < gender.length; i++) {
-            if (gender[i].value == userRes.val().gender) {
-              gender[i].checked = true;
-            }
+    uid = user.uid;
+    console.log("user ====>>>>>", user);
+    userId.innerHTML = user?.uid;
+    emailVerified.innerHTML = user?.emailVerified;
+    lastSignIn.innerHTML = user?.metadata?.lastSignInTime;
+    createdDate.innerHTML = user?.metadata?.creationTime;
+    firebase
+      .database()
+      .ref("users/" + uid)
+      .on("value", (userRes) => {
+        console.log("profile page => ", userRes.val());
+        fullName.value = userRes.val().fullName;
+        email.value = userRes.val().email;
+        age.value = userRes.val().age;
+        userRes.val().phone && (phone.value = userRes.val().phone);
+        userRes.val().bio && (bio.value = userRes.val().bio);
+        userRes.val().profileImgURL &&
+          (profileImage.src = userRes.val().profileImgURL);
+        for (let i = 0; i < gender.length; i++) {
+          if (gender[i].value == userRes.val().gender) {
+            gender[i].checked = true;
           }
-        });
-    }
+        }
+      });
   }
 });
 
@@ -74,4 +73,40 @@ const updateProfileHandler = () => {
       message.setAttribute("class", "error");
       updateBtn.value = "Update Profile";
     });
+};
+
+// profile upload
+const profileUpoadHandler = (event) => {
+  uploadMessage.style.display = "block";
+  var storageRef = firebase.storage().ref();
+  var uploadTask = storageRef
+    .child(`profile-images/${uid}`)
+    .put(event.target.files[0]);
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+      uploadMessage.innerHTML = "Upload is " + Math.floor(progress) + "% done";
+    },
+    (error) => {
+      // Handle unsuccessful uploads
+    },
+    () => {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        console.log("File available at", downloadURL);
+        firebase
+          .database()
+          .ref("users/" + uid)
+          .update({
+            profileImgURL: downloadURL,
+          })
+          .then(() => {
+            uploadMessage.style.display = "none";
+          });
+      });
+    }
+  );
 };

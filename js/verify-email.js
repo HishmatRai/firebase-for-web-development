@@ -1,10 +1,14 @@
 let userEmail = document.getElementById("userEmail");
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    if (user.emailVerified) {
+    if (user.providerData[0].providerId === "facebook.com") {
       window.location.assign("./home.html");
     } else {
-      userEmail.innerHTML = user.email;
+      if (user.emailVerified) {
+        window.location.assign("./home.html");
+      } else {
+        userEmail.innerHTML = user.email;
+      }
     }
   } else {
     window.location.assign("./login.html");

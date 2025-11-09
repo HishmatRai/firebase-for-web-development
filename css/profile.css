@@ -88,13 +88,18 @@
   color: #666;
   margin-bottom: 10px;
 }
-
+#uploadMessage {
+  display: none;
+}
 .upload-message {
   font-size: 13px;
   padding: 8px;
   border-radius: 6px;
   margin-top: 10px;
   min-height: 20px;
+  font-weight: 700;
+  color: #27ae60;
+  background-color: #d4edda;
 }
 
 .upload-message.success {

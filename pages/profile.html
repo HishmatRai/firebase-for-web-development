@@ -7,6 +7,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-storage.js"></script>
     <script src="./../js/firebase-config.js"></script>
     <link rel="stylesheet" href="./../css/home.css" />
     <link rel="stylesheet" href="./../css/profile.css" />
@@ -121,7 +122,7 @@
                   id="imageUpload"
                   accept="image/*"
                   style="display: none"
-                  onchange="UploadImage()"
+                  onchange="profileUpoadHandler(event)"
                 />
               </div>
             </div>
