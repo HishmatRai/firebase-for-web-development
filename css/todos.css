@@ -145,7 +145,6 @@
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-
 }
 
 .section-header {
@@ -201,7 +200,21 @@
   color: white;
   border-color: transparent;
 }
-
+#data-loading {
+  text-align: center;
+  color: #666;
+  font-size: 30px;
+  display: block;
+}
+#data-empty {
+  text-align: center;
+  color: #666;
+  font-size: 30px;
+  display: none;
+}
+#todoCount {
+  display: none;
+}
 /* Todos List */
 .todos-list {
   display: flex;
