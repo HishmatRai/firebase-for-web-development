@@ -6,11 +6,13 @@
     <title>My Todos - Firebase Auth</title>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src="./../js/firebase-config.js"></script>
-    <script src="./../js/navbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="./../css/home.css" />
     <link rel="stylesheet" href="./../css/my-todos.css" />
     <link rel="stylesheet" href="./../css/message.css" />
+    <link rel="stylesheet" href="./../css/todos.css" />
   </head>
   <body>
     <!-- Navbar -->
@@ -60,11 +62,14 @@
         <div class="nav-user">
           <div class="user-info">
             <div class="user-avatar">
-              <span id="navUserInitial">U</span>
+              <img
+                id="header-profile-img"
+                src="https://alliancebjjmn.com/wp-content/uploads/2019/07/placeholder-profile-sq-491x407.jpg"
+              />
             </div>
-            <span class="user-name" id="navUserName">User Name</span>
+            <span class="user-name" id="userName">Loading ...</span>
           </div>
-          <button class="btn-logout" onclick="Logout()">Log Out</button>
+          <button class="btn-logout" onclick="logoutHandler()">Log Out</button>
         </div>
 
         <div class="nav-toggle" id="navToggle">
@@ -87,7 +92,11 @@
           <!-- Add Todo Section -->
           <div class="add-todo-section">
             <h2>Add New Todo</h2>
-            <form id="todoForm" class="todo-form">
+            <form
+              id="todoForm"
+              class="todo-form"
+              onsubmit="addTodoHandler();return false"
+            >
               <div class="form-group">
                 <label for="todoTitle">Todo Title</label>
                 <input
@@ -113,76 +122,17 @@
               <span class="todo-count" id="todoCount">4 todos</span>
             </div>
 
-            <div id="todosContainer" class="todos-list"></div>
+            <div id="todosContainer" class="todos-list">
+              <p id="data-loading">Loading ...</p>
+              <p id="data-empty">No todos found!</p>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Edit Modal -->
-    <div id="editModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Edit Todo</h2>
-          <span class="close" onclick="CloseModal()">&times;</span>
-        </div>
-        <form id="editForm" class="modal-form">
-          <div class="form-group">
-            <label for="editTitle">Todo Title</label>
-            <input
-              type="text"
-              id="editTitle"
-              placeholder="Enter todo title"
-              required
-            />
-          </div>
-          <p id="editMessage" class="message"></p>
-          <div class="modal-actions">
-            <button type="button" class="btn-cancel" onclick="CloseModal()">
-              Cancel
-            </button>
-            <button type="submit" class="btn-save" id="saveBtn">
-              Save Changes
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <script>
-      const todosContainer = document.getElementById("todosContainer");
-      const todoData = [
-        {
-          title: "Learn Firebase Realtime Database",
-          date: "Oct 27, 2025 3:30 PM",
-        },
-        { title: "Build CRUD Application", date: "Oct 27, 2025 2:15 PM" },
-        { title: "Deploy to Firebase Hosting", date: "Oct 27, 2025 1:00 PM" },
-        { title: "Test Authentication Flow", date: "Oct 27, 2025 11:45 AM" },
-      ];
-
-      // Create and append todo cards
-      todoData.forEach((todo) => {
-        // Create card container
-        const card = document.createElement("div");
-        card.className = "todo-card";
-
-        // Create and set up the card HTML
-        card.innerHTML = `
-    <div class="todo-header">
-      <p class="todo-title">${todo.title}</p>
-      <div class="todo-actions">
-        <button class="btn-action btn-edit">Edit</button>
-        <button class="btn-action btn-delete">Delete</button>
-      </div>
-    </div>
-    <div class="todo-meta">
-      <span>Created: ${todo.date}</span>
-    </div>
-  `;
-
-        // Add the card to the container
-        todosContainer.appendChild(card);
-      });
-    </script>
+ 
+    <script src="./../js/navbar.js"></script>
+    <script src="./../js/realtime-my-todos.js"></script>
   </body>
 </html>
