@@ -36,7 +36,6 @@ const addTodoHandler = () => {
 
 // get todos
 let dataLoading = document.getElementById("data-loading");
-let dataEmpty = document.getElementById("data-empty");
 let todoCount = document.getElementById("todoCount");
 let todosContainer = document.getElementById("todosContainer");
 firebase
@@ -46,10 +45,10 @@ firebase
     dataLoading.style.display = "none";
     let curreentUserTodos = false;
     todoCount.style.display = "none";
+    todosContainer.innerHTML = "";
 
     let counter = 0;
     if (todoRes.val()) {
-      todosContainer.innerHTML = "";
       todoCount.style.display = "block";
       todoRes.forEach((todo) => {
         if (todo.val().email === email) {
@@ -79,14 +78,15 @@ firebase
           todosContainer.appendChild(card);
         }
       });
-      if (!curreentUserTodos) {
-        console.log("No todos found!");
-        // dataEmpty.style.display = "block";
+      if (curreentUserTodos === false) {
+        let dataEmpty = `<p id="data-empty" style="display: block">No todos found!</p>`;
+        todosContainer.innerHTML = dataEmpty;
       }
 
       todoCount.innerHTML = `${counter} ${counter === 1 ? "Todo" : "Todos"}`;
     } else {
-      dataEmpty.style.display = "block";
+      let dataEmpty = `<p id="data-empty" style="display: block">No todos found!</p>`;
+      todosContainer.innerHTML = dataEmpty;
     }
   });
 

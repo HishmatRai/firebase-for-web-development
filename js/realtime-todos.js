@@ -44,13 +44,13 @@ firebase
   .on("value", (todoRes) => {
     dataLoading.style.display = "none";
     todoCount.style.display = "none";
-    
+
     let counter = 0;
     if (todoRes.val()) {
       todosContainer.innerHTML = "";
       todoCount.style.display = "block";
       todoRes.forEach((todo) => {
-        counter++;
+        counter = counter + 1;
 
         let todoCard = document.createElement("todo-card");
         todosContainer.appendChild(todoCard);
